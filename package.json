@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
-    "generate:example": "tsx scripts/generate-example.ts"
+    "generate:example": "tsx scripts/generate-example.ts",
+    "generate:clear-view": "tsx scripts/generate-clear-view.ts"
   },
   "dependencies": {
     "react": "^19.2.7",

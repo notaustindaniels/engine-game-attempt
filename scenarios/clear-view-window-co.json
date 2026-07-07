@@ -1,0 +1,366 @@
+{
+  "domainId": "clear-view-window-co",
+  "editors": {
+    "areaLayout": {
+      "areas": [
+        {
+          "id": "the-garage",
+          "infested": false,
+          "q": 0,
+          "r": 0,
+          "river": true,
+          "start": true,
+          "terrain": "residential-repairs"
+        },
+        {
+          "id": "maple-rows",
+          "infested": false,
+          "q": 1,
+          "r": 0,
+          "river": true,
+          "start": false,
+          "terrain": "residential-repairs"
+        },
+        {
+          "id": "old-orchard-heights",
+          "infested": false,
+          "q": 0,
+          "r": -1,
+          "river": false,
+          "start": false,
+          "terrain": "residential-repairs"
+        },
+        {
+          "id": "gable-court",
+          "infested": false,
+          "q": 1,
+          "r": -1,
+          "river": false,
+          "start": false,
+          "terrain": "new-construction"
+        },
+        {
+          "id": "ninth-street",
+          "infested": false,
+          "q": -1,
+          "r": 0,
+          "river": true,
+          "start": false,
+          "terrain": "residential-repairs"
+        },
+        {
+          "id": "brickyard-flats",
+          "infested": false,
+          "q": -1,
+          "r": 1,
+          "river": false,
+          "start": false,
+          "terrain": "new-construction"
+        },
+        {
+          "id": "saint-annes-row",
+          "infested": false,
+          "q": 0,
+          "r": 1,
+          "river": false,
+          "start": false,
+          "terrain": "heritage-restoration"
+        },
+        {
+          "id": "fairground-edge",
+          "infested": false,
+          "q": 2,
+          "r": 0,
+          "river": true,
+          "start": false,
+          "terrain": "residential-repairs"
+        },
+        {
+          "id": "quarry-gate",
+          "infested": false,
+          "q": 2,
+          "r": -1,
+          "river": false,
+          "start": false,
+          "terrain": "commercial-contracts"
+        },
+        {
+          "id": "north-mall-strip",
+          "infested": true,
+          "q": 2,
+          "r": -2,
+          "river": false,
+          "start": false,
+          "terrain": "commercial-contracts"
+        },
+        {
+          "id": "hilltop-terrace",
+          "infested": false,
+          "q": 1,
+          "r": -2,
+          "river": false,
+          "start": false,
+          "terrain": "residential-repairs"
+        },
+        {
+          "id": "cathedral-quarter",
+          "infested": false,
+          "q": 0,
+          "r": -2,
+          "river": false,
+          "start": false,
+          "terrain": "heritage-restoration"
+        },
+        {
+          "id": "depot-yards",
+          "infested": false,
+          "q": -1,
+          "r": -1,
+          "river": false,
+          "start": false,
+          "terrain": "new-construction"
+        },
+        {
+          "id": "westbridge",
+          "infested": false,
+          "q": -2,
+          "r": 0,
+          "river": true,
+          "start": false,
+          "terrain": "downtown-bid-market"
+        },
+        {
+          "id": "silver-lake-shore",
+          "infested": false,
+          "q": -2,
+          "r": 1,
+          "river": false,
+          "start": false,
+          "terrain": "residential-repairs"
+        },
+        {
+          "id": "glasshouse-lane",
+          "infested": true,
+          "q": -2,
+          "r": 2,
+          "river": false,
+          "start": false,
+          "terrain": "residential-repairs"
+        },
+        {
+          "id": "southfield-plots",
+          "infested": false,
+          "q": -1,
+          "r": 2,
+          "river": false,
+          "start": false,
+          "terrain": "new-construction"
+        },
+        {
+          "id": "harbor-row",
+          "infested": true,
+          "q": 0,
+          "r": 2,
+          "river": false,
+          "start": false,
+          "terrain": "commercial-contracts"
+        },
+        {
+          "id": "midtown-parade",
+          "infested": false,
+          "q": 1,
+          "r": 1,
+          "river": false,
+          "start": false,
+          "terrain": "downtown-bid-market"
+        }
+      ],
+      "layout": "home-town"
+    },
+    "basicDetails": {
+      "description": "You are starting a window installation and glazing business with nothing but your truck, a few basic tools, and your own two hands. Bootstrap from a first paying job to a regional window empire while lead drought, cash burn, and entrenched competitors erode every idle week.",
+      "name": "The Clear View Window Co."
+    },
+    "customEvents": {
+      "events": [
+        {
+          "image": "first-install",
+          "scriptBody": "-- Fires once the company holds ground in two neighborhoods.\nON claimed >= 2\nTEXT The first two neighborhoods talk. A month of clean installs lands three referral quotes in one week.\nBUTTON Answer every call\nEFFECT resource:lead-pipeline +20\nEFFECT authority +4",
+          "scriptFileName": "word-of-mouth.lua",
+          "title": "Word of mouth"
+        },
+        {
+          "image": "cracked-pane",
+          "scriptBody": "-- The incumbents notice the new truck.\nON turn >= 45\nTEXT Pane & Simple undercuts you on a whole block of storm-window installs. The crew hears about it at the supply counter before you do.\nBUTTON Sharpen the next bid\nEFFECT pressure +8\nEFFECT morale -4",
+          "scriptFileName": "rival-underbid.lua",
+          "title": "Undercut on Storm Row"
+        },
+        {
+          "image": "winter-boardup",
+          "scriptBody": "-- Winter work: pays well, comes back every year.\nON season = winter-slowdown\nON turn >= 60\nTEXT A cold snap cracks panes across the county. Emergency board-up work pays double for a crew that answers the phone at night.\nBUTTON Roll the truck\nEFFECT resource:operating-cash +30\nEFFECT stamina +2\nREPEAT",
+          "scriptFileName": "board-up-contract.lua",
+          "title": "Cold-snap board-ups"
+        },
+        {
+          "image": "cracked-pane",
+          "scriptBody": "-- Mid-game escalation.\nON turn >= 150\nTEXT A big-box home center opens a window department off the interstate: glossy flyers, teaser pricing, subcontracted installers.\nBUTTON We out-craft them\nEFFECT pressure +10\nEFFECT morale -5",
+          "scriptFileName": "big-box-outlet.lua",
+          "title": "The big-box window aisle"
+        },
+        {
+          "image": "contract-signing",
+          "scriptBody": "-- Reward for a healthy balance sheet.\nON resource:operating-cash >= 120\nTEXT The glass supplier has watched your balance grow all season. He offers net-sixty terms and a pallet discount with a handshake.\nBUTTON Sign the terms\nEFFECT resource:glass-stock +25\nEFFECT patience +30",
+          "scriptFileName": "net-sixty-terms.lua",
+          "title": "Net-sixty terms"
+        },
+        {
+          "image": "tailgate-huddle",
+          "scriptBody": "-- The grind bites back once the company is worth raiding.\nON pressure >= 50\nON population >= 4\nTEXT A rival owner calls your best installer at home with a signing bonus and a newer truck.\nBUTTON Wish him well, mean it\nEFFECT population -1\nEFFECT morale -6",
+          "scriptFileName": "poaching-call.lua",
+          "title": "The poaching call"
+        }
+      ]
+    },
+    "defense": {
+      "healingRatePct": 1,
+      "reinforcement": true,
+      "startingUnits": 1,
+      "supplyAttrition": true
+    },
+    "goals": {
+      "goals": [
+        {
+          "patience": 120,
+          "stable": false,
+          "targetAmount": 3,
+          "type": "survey-territories"
+        },
+        {
+          "patience": 200,
+          "stable": false,
+          "targetAmount": 2,
+          "type": "open-service-areas"
+        },
+        {
+          "patience": 260,
+          "stable": false,
+          "targetAmount": 60,
+          "type": "book-revenue"
+        },
+        {
+          "patience": 330,
+          "stable": false,
+          "targetAmount": 3,
+          "type": "grow-the-crew"
+        },
+        {
+          "patience": 400,
+          "stable": false,
+          "targetAmount": 2,
+          "type": "shut-down-undercutters"
+        },
+        {
+          "patience": 420,
+          "stable": false,
+          "targetAmount": 6,
+          "type": "open-service-areas"
+        },
+        {
+          "patience": 450,
+          "stable": false,
+          "targetAmount": 150,
+          "type": "build-cash-reserves"
+        }
+      ]
+    },
+    "modifiers": {
+      "active": [
+        {
+          "modifier": "residential-referrals",
+          "patiencePoints": 2
+        },
+        {
+          "modifier": "crew-recovery-program",
+          "patiencePoints": 1
+        }
+      ],
+      "difficulty": "entrenched-competition"
+    },
+    "pressure": {
+      "cleanseBacklash": true,
+      "growthRate": 16,
+      "infestedAreas": 3,
+      "startingIntensity": 22,
+      "surpriseThreats": true
+    },
+    "resources": {
+      "stockpiles": {
+        "crew-welfare": {
+          "amount": 0,
+          "op": "SET"
+        },
+        "fabrication-line": {
+          "amount": 0,
+          "op": "SET"
+        },
+        "glass-stock": {
+          "amount": 8,
+          "op": "SET"
+        },
+        "lead-pipeline": {
+          "amount": 6,
+          "op": "SET"
+        },
+        "operating-cash": {
+          "amount": 40,
+          "op": "SET"
+        },
+        "tools-equipment": {
+          "amount": 12,
+          "op": "SET"
+        },
+        "weatherization-kits": {
+          "amount": 0,
+          "op": "SET"
+        }
+      }
+    },
+    "seasons": {
+      "month1": "winter-slowdown",
+      "month10": "install-season",
+      "month11": "winter-slowdown",
+      "month12": "winter-slowdown",
+      "month2": "install-season",
+      "month3": "install-season",
+      "month4": "install-season",
+      "month5": "install-season",
+      "month6": "install-season",
+      "month7": "lead-drought",
+      "month8": "install-season",
+      "month9": "install-season"
+    },
+    "startingEvents": {
+      "events": [
+        {
+          "buttonText": "Take the job",
+          "description": "A neighbor two streets over lost a bay window to last night’s storm. You have the truck, a glass cutter, a caulking gun, and two good hands. She is standing in her doorway, waiting for a yes.",
+          "image": "first-install",
+          "title": "The first paying job"
+        },
+        {
+          "buttonText": "Get to work",
+          "description": "Pane & Simple, Glasshouse Bros., and Harbor Glazing split this town years ago. Their yards are full, their crews are settled, and none of them know your name yet. That is the one advantage you have.",
+          "image": "truck-loaded",
+          "title": "Three names on every van"
+        }
+      ]
+    },
+    "startingValues": {
+      "authority": 50,
+      "morale": 62,
+      "population": 2,
+      "stamina": 4
+    }
+  },
+  "formatVersion": 1
+}

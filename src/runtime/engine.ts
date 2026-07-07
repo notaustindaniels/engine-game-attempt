@@ -80,6 +80,7 @@ function fail(state: GameState, error: ActionError): ActionResult {
 
 function log(s: GameState, code: LogCode, subject?: string): void {
   s.log.push(subject === undefined ? { turn: s.turn, code } : { turn: s.turn, code, subject });
+  if (s.log.length > 200) s.log.shift();
 }
 
 function cellById(rules: GameRules, id: string): AreaCell | undefined {
@@ -480,22 +481,40 @@ function stepPressure(rules: GameRules, s: GameState): void {
     area.threats = Math.min(TUNING.areaThreatCap, area.threats + spawnRate);
   }
 
-  // Threat migration toward the settlement (every N turns).
+  // Threat migration toward the settlement (every N turns). Producer areas
+  // emit one point once they hold enough; loose threats in the open (not in
+  // a producer area, not pinned by a defender) march one step closer.
   if (s.turn > 0 && s.turn % TUNING.migrateEveryTurns === 0) {
+    const moves: { from: string; to: string; amount: number }[] = [];
     for (const cell of rules.areas) {
       const area = s.areas[cell.id];
-      if (!area || !area.infested || area.threats < TUNING.migrateMinThreats) continue;
+      if (!area || area.threats <= 0 || cell.start) continue;
+      const pinned = s.defenders.some((d) => d.areaId === cell.id && d.health > 0);
+      if (pinned) continue;
+      const emits = area.infested
+        ? area.threats >= TUNING.migrateMinThreats
+          ? 1
+          : 0
+        : area.threats;
+      if (emits <= 0) continue;
       const towardStart = neighborsOf(cell, rules.areas)
         .slice()
         .sort(
           (a, b) => hexDistance(a, start) - hexDistance(b, start) || a.id.localeCompare(b.id),
         )[0];
-      if (!towardStart) continue;
-      const target = s.areas[towardStart.id];
-      if (!target) continue;
-      area.threats -= 1;
-      target.threats = Math.min(TUNING.areaThreatCap, target.threats + 1);
-      if (towardStart.id === start.id) log(s, 'attack', start.id);
+      if (!towardStart || hexDistance(towardStart, start) >= hexDistance(cell, start)) {
+        continue;
+      }
+      moves.push({ from: cell.id, to: towardStart.id, amount: emits });
+    }
+    for (const move of moves) {
+      const from = s.areas[move.from];
+      const to = s.areas[move.to];
+      if (!from || !to) continue;
+      const amount = Math.min(move.amount, from.threats);
+      from.threats -= amount;
+      to.threats = Math.min(TUNING.areaThreatCap, to.threats + amount);
+      if (move.to === start.id && amount > 0) log(s, 'attack', start.id);
     }
   }
 
@@ -559,22 +578,26 @@ function stepCombat(rules: GameRules, s: GameState): void {
     } else {
       area.threats = 0;
     }
-
-    if (area.cleansing && area.threats === 0) {
-      area.cleansing = false;
-      if (area.infested) {
-        area.infested = false;
-        s.counters.cleansed += 1;
-        s.pressureIntensity = clamp(
-          s.pressureIntensity - TUNING.cleanseIntensityDrop,
-          0,
-          100,
-        );
-        log(s, 'cleansed', cell.id);
-      }
-    }
   }
   s.defenders = s.defenders.filter((d) => d.health > 0);
+
+  // A pending cleanse resolves once its area is clear with a crew present.
+  for (const cell of rules.areas) {
+    const area = s.areas[cell.id];
+    if (!area || !area.cleansing || area.threats > 0) continue;
+    if (!s.defenders.some((d) => d.areaId === cell.id)) continue;
+    area.cleansing = false;
+    if (area.infested) {
+      area.infested = false;
+      s.counters.cleansed += 1;
+      s.pressureIntensity = clamp(
+        s.pressureIntensity - TUNING.cleanseIntensityDrop,
+        0,
+        100,
+      );
+      log(s, 'cleansed', cell.id);
+    }
+  }
 }
 
 function stepHealing(rules: GameRules, s: GameState): void {

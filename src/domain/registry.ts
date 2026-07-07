@@ -1,5 +1,6 @@
 import { domainSchemaZ, type DomainSchema } from './types.ts';
 import { afterIncDomain } from './afterInc.ts';
+import { clearViewDomain } from './clearView.ts';
 import { blueprintTokens } from '../engine/blueprint.ts';
 import { runtimeTokens } from '../runtime/tokens.ts';
 import { nichePacks } from './business/niches.ts';
@@ -27,6 +28,7 @@ export function registerDomain(domain: DomainSchema): DomainSchema {
 }
 
 registerDomain(afterIncDomain);
+registerDomain(clearViewDomain);
 
 /** Every resolvable domain id: the canonical domain + one per business niche. */
 export function listDomainIds(): string[] {
