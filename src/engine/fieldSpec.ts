@@ -33,6 +33,8 @@ export interface TextFieldSpec extends FieldBase {
   minLength: number;
   maxLength: number;
   defaultValue: string;
+  /** Optional format constraint (e.g. sourced ".lua/.txt" file kinds). */
+  pattern?: { regex: string; flags?: string; description: string };
 }
 
 export interface NumberFieldSpec extends FieldBase {

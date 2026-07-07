@@ -109,15 +109,51 @@ describe('blueprint structure (research contract)', () => {
     expect(blueprint.filter((e) => e.category === 'advanced')).toHaveLength(5);
   });
 
-  it('gives every editor and field a source (wiki URL or GAP marker)', () => {
+  it('gives every editor, field, AND list-item field a source (wiki URL or GAP marker)', () => {
+    const isTraceable = (source: string) =>
+      source.includes('afterinc.wiki.gg') || source.includes('GAP:');
     for (const editor of blueprint) {
-      expect(editor.source.length, editor.id).toBeGreaterThan(0);
+      expect(isTraceable(editor.source), `${editor.id}: ${editor.source}`).toBe(
+        true,
+      );
       for (const field of editor.fields) {
-        const ok =
-          field.source.includes('afterinc.wiki.gg') ||
-          field.source.includes('GAP:');
-        expect(ok, `${editor.id}.${field.id} source: ${field.source}`).toBe(true);
+        expect(
+          isTraceable(field.source),
+          `${editor.id}.${field.id}: ${field.source}`,
+        ).toBe(true);
+        if (field.kind === 'list') {
+          for (const item of field.item) {
+            expect(
+              isTraceable(item.source),
+              `${editor.id}.${field.id}.${item.id}: ${item.source}`,
+            ).toBe(true);
+          }
+        }
       }
     }
+  });
+
+  it('enforces the sourced .lua/.txt constraint on custom event scripts', () => {
+    const scenario = validScenario();
+    const editor = scenario.editors['customEvents'] as {
+      events: Record<string, unknown>[];
+    };
+    const validEvent = {
+      title: 'Supply run',
+      scriptFileName: 'supply-run.lua',
+      scriptBody: '',
+      image: afterIncDomain.pools.eventImages[0]?.id ?? '',
+    };
+    editor.events = [validEvent];
+    expect(schema.safeParse(scenario).success).toBe(true);
+
+    editor.events = [{ ...validEvent, scriptFileName: 'supply-run.txt' }];
+    expect(schema.safeParse(scenario).success).toBe(true);
+
+    editor.events = [{ ...validEvent, scriptFileName: 'virus.exe' }];
+    expect(schema.safeParse(scenario).success).toBe(false);
+
+    editor.events = [{ ...validEvent, scriptFileName: 'no-extension' }];
+    expect(schema.safeParse(scenario).success).toBe(false);
   });
 });

@@ -36,8 +36,16 @@ function selectValues(field: SelectFieldSpec, domain: DomainSchema): string[] {
 function scalarZod(field: ScalarFieldSpec, domain: DomainSchema): z.ZodType {
   switch (field.kind) {
     case 'text':
-    case 'longtext':
-      return z.string().min(field.minLength).max(field.maxLength);
+    case 'longtext': {
+      let schema = z.string().min(field.minLength).max(field.maxLength);
+      if (field.pattern) {
+        schema = schema.regex(
+          new RegExp(field.pattern.regex, field.pattern.flags),
+          field.pattern.description,
+        );
+      }
+      return schema;
+    }
     case 'number':
     case 'slider': {
       let schema = z.number().min(field.min).max(field.max);

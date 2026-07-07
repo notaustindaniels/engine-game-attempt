@@ -16,9 +16,10 @@ const gapsText = readFileSync(
 );
 
 function gapRefs(source: string): string[] {
-  const match = /GAP:([A-Z0-9,]+)/.exec(source);
-  if (!match || match[1] === undefined) return [];
-  return match[1].split(',');
+  // Match EVERY GAP:... occurrence in the source string, not just the first.
+  return [...source.matchAll(/GAP:([A-Z0-9,]+)/g)].flatMap((m) =>
+    (m[1] ?? '').split(',').filter((ref) => ref.length > 0),
+  );
 }
 
 describe('blueprint ↔ research traceability', () => {

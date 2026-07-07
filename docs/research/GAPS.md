@@ -47,7 +47,10 @@ network policy), so anything the page does not spell out in indexed text is unre
 | B12 | Modifiers editor = difficulty select (4 sourced difficulties) + list of {modifier, patiencePoints [-10..10]} | Difficulty tiers and patience-point economy sourced (Difficulty/Modifiers pages); placement of difficulty here, and the ±10 range, reconstructed | `GAP:A7,A14` |
 | B13 | Event-image galleries are domain-supplied option pools with domain-native labels | The game's gallery reference exists but its identifiers are unindexed (A10) | `GAP:A10` |
 | B14 | The unattributed [0-14] and [1-7] ranges are NOT used anywhere | Refusing attribution is the honest reading of A11 | — |
-| B15 | Leaders pool is carried by every domain schema (10 sourced archetypes in after-inc) but no editor field selects one | Leaders are a play-time choice per the Leaders page; no editor evidence ties them to the Scenario Creator | — |
+| B15 | Leaders and terrains pools are carried by every domain schema (10 sourced archetypes, 5 sourced terrain classes in after-inc) but no editor field selects from them | Leaders are a play-time choice per the Leaders page; terrain classes are sourced concept data subsumed by the area-layout presets. No editor evidence ties either to the Scenario Creator | — |
+| B16 | Micro-constraints invented for a workable editor and nowhere sourced: all text length caps (name 80, descriptions 500, button 40, file name 120, script body 20000), all list caps (starting events ≤10, custom events ≤20, goals ≤20, modifiers ≤10), and every defaultValue (A12: no defaults are sourced anywhere) | Practical editor limits only; never presented as wiki facts | `GAP:B16` / umbrella for A12 |
 
-Every `GAP:` marker in the blueprint names the A-row(s) it depends on, so the adversarial
-verification lane can mechanically cross-check app fields against this file.
+Every `GAP:` marker in the blueprint names the GAPS.md row(s) it depends on — usually a
+B-row (reconstruction decision, which in turn cites its A-rows), occasionally an A-row
+directly — so the adversarial verification lane can mechanically cross-check app fields
+against this file.

@@ -5,7 +5,7 @@
       "layout": "local-market"
     },
     "basicDetails": {
-      "description": "Grow a new center from a signed lease and a small founding educators into a durable local institution, while enrollment churn & staffing gaps works against every idle week.",
+      "description": "Grow a new center from a signed lease and a small founding team into a durable local institution, while enrollment churn & staffing gaps works against every idle week.",
       "name": "Daycare Center: First Year on the Books"
     },
     "customEvents": {
@@ -128,7 +128,7 @@
       "events": [
         {
           "buttonText": "Open the doors",
-          "description": "The lease is signed, the classrooms & play yards is installed, and the first enrollment inquiries are trickling in. Runway is thin, and enrollment churn & staffing gaps will not wait.",
+          "description": "The lease is signed, and with the classrooms & play yards in place, the first enrollment inquiries are trickling in. Runway is thin, and enrollment churn & staffing gaps will not wait.",
           "image": "grand-opening",
           "title": "Opening day"
         },

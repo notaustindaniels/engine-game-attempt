@@ -90,7 +90,7 @@ export const blueprint: Blueprint = [
         kind: 'list',
         minItems: 1,
         maxItems: 10,
-        source: `${CS} (list confirmed; item shape GAP:B3)`,
+        source: `${CS} (list confirmed; item shape GAP:B3; caps GAP:B16)`,
         item: [
           {
             id: 'title',
@@ -207,7 +207,7 @@ export const blueprint: Blueprint = [
         kind: 'list',
         minItems: 0,
         maxItems: 20,
-        source: `${CS} (script upload .txt/.lua sourced; item shape GAP:B8)`,
+        source: `${CS} (script upload .txt/.lua sourced; item shape GAP:B8; caps GAP:B16)`,
         item: [
           {
             id: 'title',
@@ -225,7 +225,12 @@ export const blueprint: Blueprint = [
             minLength: 1,
             maxLength: 120,
             defaultValue: 'event.lua',
-            source: `${CS} (text or lua file kinds sourced)`,
+            pattern: {
+              regex: '\\.(lua|txt)$',
+              flags: 'i',
+              description: 'Script files must be .lua or .txt',
+            },
+            source: `${CS} (text or lua file kinds sourced and enforced; field itself GAP:B8)`,
           },
           {
             id: 'scriptBody',
@@ -255,14 +260,15 @@ export const blueprint: Blueprint = [
         kind: 'list',
         minItems: 1,
         maxItems: 20,
-        source: 'GAP:B9',
+        source: 'GAP:B9,B16',
         item: [
           {
             id: 'type',
             labelToken: 'field.goals.type',
             kind: 'select',
             options: { from: 'domain', pool: 'goalTypes' },
-            source: 'https://afterinc.wiki.gg/wiki/Goals (11 goal types sourced)',
+            source:
+              'https://afterinc.wiki.gg/wiki/Goals (11 goal types sourced; field placement GAP:B9)',
           },
           {
             id: 'targetAmount',
@@ -289,7 +295,8 @@ export const blueprint: Blueprint = [
             labelToken: 'field.goals.stable',
             kind: 'toggle',
             defaultValue: false,
-            source: 'https://afterinc.wiki.gg/wiki/Goals (stable goals sourced)',
+            source:
+              'https://afterinc.wiki.gg/wiki/Goals (stable-goal mechanic sourced; field GAP:B9)',
           },
         ],
       },
@@ -339,14 +346,16 @@ export const blueprint: Blueprint = [
         labelToken: 'field.pressure.surpriseThreats',
         kind: 'toggle',
         defaultValue: true,
-        source: 'https://afterinc.wiki.gg/wiki/Areas (surprise-attack mechanic sourced)',
+        source:
+          'https://afterinc.wiki.gg/wiki/Areas + /wiki/Fighters (surprise-attack mechanic sourced; field GAP:B10)',
       },
       {
         id: 'cleanseBacklash',
         labelToken: 'field.pressure.cleanseBacklash',
         kind: 'toggle',
         defaultValue: true,
-        source: 'https://afterinc.wiki.gg/wiki/Areas (cleanse-backlash mechanic sourced)',
+        source:
+          'https://afterinc.wiki.gg/wiki/Areas (cleanse-backlash mechanic sourced; field GAP:B10)',
       },
     ],
   },
@@ -378,21 +387,23 @@ export const blueprint: Blueprint = [
         integer: false,
         defaultValue: 0.2,
         source:
-          'https://afterinc.wiki.gg/wiki/Fighters (0.2–10 %/turn healing spread sourced)',
+          'https://afterinc.wiki.gg/wiki/Fighters (0.2–10 %/turn healing spread sourced; field + [0,10] range GAP:B11)',
       },
       {
         id: 'reinforcement',
         labelToken: 'field.defense.reinforcement',
         kind: 'toggle',
         defaultValue: true,
-        source: 'https://afterinc.wiki.gg/wiki/Fighters (reinforcement mechanic sourced)',
+        source:
+          'https://afterinc.wiki.gg/wiki/Fighters (reinforcement mechanic sourced; field GAP:B11)',
       },
       {
         id: 'supplyAttrition',
         labelToken: 'field.defense.supplyAttrition',
         kind: 'toggle',
         defaultValue: true,
-        source: 'https://afterinc.wiki.gg/wiki/Fighters (supply-attrition mechanic sourced)',
+        source:
+          'https://afterinc.wiki.gg/wiki/Fighters (supply-attrition mechanic sourced; field GAP:B11)',
       },
     ],
   },
@@ -418,7 +429,7 @@ export const blueprint: Blueprint = [
         kind: 'list',
         minItems: 0,
         maxItems: 10,
-        source: 'GAP:B12',
+        source: 'GAP:B12,B16',
         item: [
           {
             id: 'modifier',

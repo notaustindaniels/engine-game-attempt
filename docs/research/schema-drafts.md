@@ -72,7 +72,8 @@ const seasons = z.strictObject({
 const customEvents = z.strictObject({
   events: z.array(z.strictObject({
     title: z.string().min(1).max(80),
-    scriptFileName: z.string().min(1).max(120), // .lua/.txt kinds sourced
+    scriptFileName: z.string().min(1).max(120)
+      .regex(/\.(lua|txt)$/i),                  // .lua/.txt kinds sourced + enforced
     scriptBody: z.string().max(20000),          // inline body GAP:B8 (no API list exists, GAP:A9)
     image: z.enum(domain.eventImages),
   })).min(0).max(20),

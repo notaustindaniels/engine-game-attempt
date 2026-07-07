@@ -2,8 +2,12 @@ import { z } from 'zod';
 
 /**
  * A theme is pure presentation: color tokens, typography, UI chrome strings,
- * and icon assets. Themes carry ZERO scenario/domain semantics — swapping the
- * theme folder must reskin the app 1:1 with no component-code changes.
+ * and icon assets. Themes carry ZERO domain/mechanic semantics — swapping the
+ * theme folder must reskin the app 1:1 with no component-code changes. Chrome
+ * strings may be flavored to the theme's aesthetic (the after-inc skin words
+ * its buttons in-world); scenario CONTENT language always comes from the
+ * domain schema, so the vocabulary lint on business scenario output is
+ * unaffected by theme choice.
  */
 
 export const themeTokensSchema = z.object({

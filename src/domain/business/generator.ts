@@ -251,7 +251,7 @@ export function buildNicheScenario(pack: NichePack): {
   scenario.editors['basicDetails'] = {
     name: `${pack.label}: First Year on the Books`,
     description:
-      `Grow a new ${pack.venture} from a signed lease and a small founding ${pack.team} into a durable local institution, while ${pack.pressureLabel.toLowerCase()} works against every idle week.`,
+      `Grow a new ${pack.venture} from a signed lease and a small founding team into a durable local institution, while ${pack.pressureLabel.toLowerCase()} works against every idle week.`,
   };
   scenario.editors['areaLayout'] = { layout: 'local-market' };
   scenario.editors['startingEvents'] = {
@@ -259,7 +259,7 @@ export function buildNicheScenario(pack: NichePack): {
       {
         title: 'Opening day',
         description:
-          `The lease is signed, the ${pack.gearTerm.toLowerCase()} is installed, and the first ${pack.inquiriesTerm.toLowerCase()} are trickling in. Runway is thin, and ${pack.pressureLabel.toLowerCase()} will not wait.`,
+          `The lease is signed, and with the ${pack.gearTerm.toLowerCase()} in place, the first ${pack.inquiriesTerm.toLowerCase()} are trickling in. Runway is thin, and ${pack.pressureLabel.toLowerCase()} will not wait.`,
         buttonText: 'Open the doors',
         image: 'grand-opening',
       },
