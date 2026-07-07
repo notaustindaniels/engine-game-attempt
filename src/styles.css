@@ -1,0 +1,334 @@
+/* Structural stylesheet only. Every color, font, radius and spacing value
+   comes from theme CSS variables set on .app-root — themes restyle the app
+   without touching this file or any component. */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.app-root {
+  min-height: 100vh;
+  background: var(--color-background);
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
+
+.app-header {
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.app-title {
+  font-family: var(--font-heading);
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.app-tagline {
+  margin: 0;
+  color: var(--color-textMuted);
+  flex: 1;
+}
+
+.app-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.app-action {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background: var(--color-accent);
+  color: var(--color-accentText);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+.app-import-input {
+  display: none;
+}
+
+.app-body {
+  display: grid;
+  grid-template-columns: 240px 1fr 320px;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  align-items: start;
+}
+
+.editor-nav {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  padding: var(--spacing-sm);
+}
+
+.editor-nav-category {
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: var(--color-textMuted);
+  margin: var(--spacing-sm) 0 var(--spacing-xs);
+}
+
+.editor-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.editor-nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  width: 100%;
+  background: transparent;
+  color: var(--color-text);
+  border: none;
+  border-radius: var(--radius-small);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-family: var(--font-body);
+  cursor: pointer;
+  text-align: left;
+}
+
+.editor-nav-item[data-active='true'] {
+  background: var(--color-accent);
+  color: var(--color-accentText);
+}
+
+.editor-main {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.editor-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  padding: var(--spacing-md);
+}
+
+.editor-panel-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.editor-panel-title {
+  font-family: var(--font-heading);
+  margin: 0;
+}
+
+.editor-panel-description {
+  color: var(--color-textMuted);
+}
+
+.editor-panel-fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.editor-field-label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+}
+
+.editor-field-help {
+  color: var(--color-textMuted);
+  font-size: 0.85rem;
+  margin: 0 0 var(--spacing-xs);
+}
+
+.field-input {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-surfaceRaised);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  max-width: 100%;
+}
+
+.field-longtext {
+  width: 100%;
+  min-height: 5em;
+}
+
+.field-slider-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.field-slider-value {
+  font-family: var(--font-mono);
+  min-width: 3ch;
+}
+
+.field-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.field-list-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  align-items: end;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  padding: var(--spacing-sm);
+  background: var(--color-surfaceRaised);
+}
+
+.field-list-cell-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-textMuted);
+  margin-bottom: 2px;
+}
+
+.field-list-add,
+.field-list-remove {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background: var(--color-surfaceRaised);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-small);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  cursor: pointer;
+}
+
+.field-list-add:disabled,
+.field-list-remove:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.field-resource-ops {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.resource-op-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+.resource-op-name {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.preview-panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  padding: var(--spacing-md);
+  position: sticky;
+  top: var(--spacing-md);
+  max-height: calc(100vh - 2 * var(--spacing-md));
+  overflow-y: auto;
+}
+
+.preview-panel-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.preview-panel-title {
+  font-family: var(--font-heading);
+  margin: 0;
+}
+
+.preview-editor-title {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  color: var(--color-textMuted);
+  margin: var(--spacing-md) 0 var(--spacing-xs);
+  text-transform: uppercase;
+}
+
+.preview-fields {
+  margin: 0;
+}
+
+.preview-field {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-sm);
+  padding: 2px 0;
+  border-bottom: 1px dotted var(--color-border);
+}
+
+.preview-field-label {
+  color: var(--color-textMuted);
+}
+
+.preview-field-value {
+  margin: 0;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.validation-panel {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-medium);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-surface);
+}
+
+.validation-panel[data-state='error'] {
+  border-color: var(--color-danger);
+}
+
+.validation-title {
+  font-family: var(--font-heading);
+  margin: 0 0 var(--spacing-xs);
+  font-size: 0.9rem;
+}
+
+.validation-ok {
+  color: var(--color-success);
+  margin: 0;
+}
+
+.validation-issue {
+  color: var(--color-danger);
+}
+
+.icon-glyph {
+  display: inline-flex;
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.icon-glyph svg {
+  width: 100%;
+  height: 100%;
+}

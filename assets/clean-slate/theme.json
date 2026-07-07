@@ -1,0 +1,75 @@
+{
+  "id": "clean-slate",
+  "name": "Clean Slate",
+  "description": "Neutral business skin: calm light palette, humanist type, soft corners.",
+  "tokens": {
+    "color": {
+      "background": "#f7f8fa",
+      "surface": "#ffffff",
+      "surfaceRaised": "#eef1f5",
+      "border": "#d4dae2",
+      "text": "#1d2530",
+      "textMuted": "#5b6675",
+      "accent": "#2c6bed",
+      "accentText": "#ffffff",
+      "danger": "#c93a3a",
+      "success": "#2e8b57"
+    },
+    "font": {
+      "body": "'Segoe UI', 'Helvetica Neue', sans-serif",
+      "heading": "'Segoe UI Semibold', 'Helvetica Neue', sans-serif",
+      "mono": "'Consolas', monospace"
+    },
+    "radius": {
+      "small": "4px",
+      "medium": "8px",
+      "large": "12px"
+    },
+    "spacing": {
+      "xs": "4px",
+      "sm": "8px",
+      "md": "16px",
+      "lg": "24px"
+    }
+  },
+  "strings": {
+    "app.title": "Scenario Studio",
+    "app.tagline": "Design simulations for any industry",
+    "nav.category.base": "Essentials",
+    "nav.category.advanced": "Advanced",
+    "action.export": "Export JSON",
+    "action.import": "Import JSON",
+    "action.add": "Add item",
+    "action.remove": "Remove item",
+    "action.newScenario": "New scenario",
+    "picker.theme": "Theme",
+    "picker.domain": "Domain",
+    "preview.title": "Live Preview",
+    "preview.empty": "Nothing to preview yet.",
+    "validation.title": "Validation",
+    "validation.ok": "All fields valid",
+    "resourceOp.ADD": "Add to default",
+    "resourceOp.SET": "Set (override default)",
+    "field.unset": "—"
+  },
+  "icons": {
+    "fallback": "fallback.svg",
+    "action.export": "export.svg",
+    "action.import": "import.svg",
+    "action.add": "add.svg",
+    "action.remove": "remove.svg",
+    "panel.preview": "preview.svg",
+    "mechanic.settings": "settings.svg",
+    "mechanic.pressure": "pressure.svg",
+    "mechanic.resource": "resource.svg",
+    "mechanic.region": "region.svg",
+    "mechanic.season": "season.svg",
+    "mechanic.goal": "goal.svg",
+    "mechanic.event": "event.svg",
+    "mechanic.leader": "leader.svg",
+    "mechanic.modifier": "modifier.svg",
+    "mechanic.defense": "defense.svg",
+    "mechanic.morale": "morale.svg",
+    "mechanic.authority": "authority.svg"
+  }
+}

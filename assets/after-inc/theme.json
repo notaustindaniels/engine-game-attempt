@@ -1,0 +1,75 @@
+{
+  "id": "after-inc",
+  "name": "After Inc.",
+  "description": "Post-apocalyptic survival skin: scorched earth palette, stencil headings, hazard accents.",
+  "tokens": {
+    "color": {
+      "background": "#14120e",
+      "surface": "#1f1b14",
+      "surfaceRaised": "#2a251a",
+      "border": "#4a4030",
+      "text": "#e8ddc4",
+      "textMuted": "#a39877",
+      "accent": "#c9a227",
+      "accentText": "#14120e",
+      "danger": "#b3462e",
+      "success": "#7a8c3f"
+    },
+    "font": {
+      "body": "'Courier New', monospace",
+      "heading": "'Impact', 'Arial Black', sans-serif",
+      "mono": "'Courier New', monospace"
+    },
+    "radius": {
+      "small": "0px",
+      "medium": "2px",
+      "large": "4px"
+    },
+    "spacing": {
+      "xs": "4px",
+      "sm": "8px",
+      "md": "16px",
+      "lg": "24px"
+    }
+  },
+  "strings": {
+    "app.title": "Scenario Forge",
+    "app.tagline": "Build the world after the fall",
+    "nav.category.base": "Field Manual",
+    "nav.category.advanced": "Command Bunker",
+    "action.export": "Stash to disk",
+    "action.import": "Scavenge from disk",
+    "action.add": "Recruit",
+    "action.remove": "Abandon",
+    "action.newScenario": "New expedition",
+    "picker.theme": "Skin",
+    "picker.domain": "World",
+    "preview.title": "Recon Report",
+    "preview.empty": "Nothing on the horizon yet.",
+    "validation.title": "Damage Report",
+    "validation.ok": "All systems holding",
+    "resourceOp.ADD": "Add to stockpile",
+    "resourceOp.SET": "Override stockpile",
+    "field.unset": "—"
+  },
+  "icons": {
+    "fallback": "fallback.svg",
+    "action.export": "export.svg",
+    "action.import": "import.svg",
+    "action.add": "add.svg",
+    "action.remove": "remove.svg",
+    "panel.preview": "preview.svg",
+    "mechanic.settings": "settings.svg",
+    "mechanic.pressure": "pressure.svg",
+    "mechanic.resource": "resource.svg",
+    "mechanic.region": "region.svg",
+    "mechanic.season": "season.svg",
+    "mechanic.goal": "goal.svg",
+    "mechanic.event": "event.svg",
+    "mechanic.leader": "leader.svg",
+    "mechanic.modifier": "modifier.svg",
+    "mechanic.defense": "defense.svg",
+    "mechanic.morale": "morale.svg",
+    "mechanic.authority": "authority.svg"
+  }
+}

@@ -1,0 +1,150 @@
+{
+  "domainId": "biz-daycare-center",
+  "editors": {
+    "areaLayout": {
+      "layout": "local-market"
+    },
+    "basicDetails": {
+      "description": "Grow a new center from a signed lease and a small founding educators into a durable local institution, while enrollment churn & staffing gaps works against every idle week.",
+      "name": "Daycare Center: First Year on the Books"
+    },
+    "customEvents": {
+      "events": [
+        {
+          "image": "crowded-calendar",
+          "scriptBody": "-- Raises market pressure in the home segment for one cycle\n-- and unlocks a counter-campaign development.",
+          "scriptFileName": "rival-opening.lua",
+          "title": "A rival opens across the street"
+        }
+      ]
+    },
+    "defense": {
+      "healingRatePct": 0.5,
+      "reinforcement": true,
+      "startingUnits": 1,
+      "supplyAttrition": true
+    },
+    "goals": {
+      "goals": [
+        {
+          "patience": 120,
+          "stable": false,
+          "targetAmount": 3,
+          "type": "research-segments"
+        },
+        {
+          "patience": 180,
+          "stable": false,
+          "targetAmount": 500,
+          "type": "generate-revenue"
+        },
+        {
+          "patience": 200,
+          "stable": false,
+          "targetAmount": 2,
+          "type": "enter-markets"
+        },
+        {
+          "patience": 90,
+          "stable": true,
+          "targetAmount": 60,
+          "type": "sustain-culture"
+        },
+        {
+          "patience": 240,
+          "stable": false,
+          "targetAmount": 2,
+          "type": "resolve-churn-sources"
+        }
+      ]
+    },
+    "modifiers": {
+      "active": [
+        {
+          "modifier": "edge-steady-volume",
+          "patiencePoints": -2
+        },
+        {
+          "modifier": "field-overhead",
+          "patiencePoints": 1
+        }
+      ],
+      "difficulty": "balanced"
+    },
+    "pressure": {
+      "cleanseBacklash": true,
+      "growthRate": 15,
+      "infestedAreas": 3,
+      "startingIntensity": 25,
+      "surpriseThreats": true
+    },
+    "resources": {
+      "stockpiles": {
+        "automation-systems": {
+          "amount": 0,
+          "op": "ADD"
+        },
+        "capital-equipment": {
+          "amount": 250,
+          "op": "SET"
+        },
+        "demand-pipeline": {
+          "amount": 150,
+          "op": "ADD"
+        },
+        "marketing-budget": {
+          "amount": 400,
+          "op": "SET"
+        },
+        "payroll-fund": {
+          "amount": 1200,
+          "op": "SET"
+        },
+        "supplies": {
+          "amount": 300,
+          "op": "ADD"
+        },
+        "wellbeing-fund": {
+          "amount": 0,
+          "op": "ADD"
+        }
+      }
+    },
+    "seasons": {
+      "month1": "slow",
+      "month10": "slow",
+      "month11": "slow",
+      "month12": "peak",
+      "month2": "slow",
+      "month3": "peak",
+      "month4": "peak",
+      "month5": "peak",
+      "month6": "peak",
+      "month7": "peak",
+      "month8": "crunch",
+      "month9": "peak"
+    },
+    "startingEvents": {
+      "events": [
+        {
+          "buttonText": "Open the doors",
+          "description": "The lease is signed, the classrooms & play yards is installed, and the first enrollment inquiries are trickling in. Runway is thin, and enrollment churn & staffing gaps will not wait.",
+          "image": "grand-opening",
+          "title": "Opening day"
+        },
+        {
+          "buttonText": "Plan ahead",
+          "description": "Veterans of this market warn that the summer-holiday dip thins demand every year. Reserves and visibility spend decide who is still trading in spring.",
+          "image": "quiet-month",
+          "title": "Summer-holiday dip is coming"
+        }
+      ]
+    },
+    "startingValues": {
+      "authority": 55,
+      "morale": 70,
+      "population": 4
+    }
+  },
+  "formatVersion": 1
+}
