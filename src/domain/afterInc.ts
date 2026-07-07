@@ -40,6 +40,11 @@ export const afterIncDomain: DomainSchema = {
       label: 'Area Layout',
     },
     'field.areaLayout.layout': { label: 'Area layout' },
+    'field.areaLayout.areas': { label: 'Region map' },
+    'field.area.terrain': { label: 'Terrain' },
+    'field.area.river': { label: 'River adjacent' },
+    'field.area.infested': { label: 'Infested area' },
+    'field.area.start': { label: 'Settlement area' },
 
     'editor.startingEvents': { label: 'Starting Events' },
     'editor.startingEvents.desc': {
@@ -61,6 +66,7 @@ export const afterIncDomain: DomainSchema = {
     'field.startingValues.morale': { label: 'Starting morale' },
     'field.startingValues.authority': { label: 'Starting authority' },
     'field.startingValues.population': { label: 'Starting population' },
+    'field.startingValues.stamina': { label: 'Starting stamina' },
 
     'editor.resources': { label: 'Resources' },
     'editor.resources.desc': {
@@ -181,12 +187,13 @@ export const afterIncDomain: DomainSchema = {
       { id: 'slumlord', label: 'Slumlord', description: 'Growth without housing; gains per settler.' },
       { id: 'cub-scout', label: 'Cub Scout', description: 'Free slow exploration; dear targeted scouting.' },
     ],
-    // https://afterinc.wiki.gg/wiki/Modifiers (family list single-source; GAP:A14)
+    // https://afterinc.wiki.gg/wiki/Modifiers (family list single-source; GAP:A14).
+    // Slots 0-4 follow the terrains pool order (slot convention, GAPS.md C4).
     modifiers: [
-      { id: 'combat-forest', label: 'Forest combat boost', description: 'Soldier combat bonus in forests.' },
       { id: 'combat-grassland', label: 'Grassland combat boost', description: 'Soldier combat bonus in grasslands.' },
-      { id: 'combat-mountain', label: 'Mountain combat boost', description: 'Soldier combat bonus in mountains.' },
+      { id: 'combat-forest', label: 'Forest combat boost', description: 'Soldier combat bonus in forests.' },
       { id: 'combat-swamp', label: 'Swamp combat boost', description: 'Soldier combat bonus in swamps.' },
+      { id: 'combat-mountain', label: 'Mountain combat boost', description: 'Soldier combat bonus in mountains.' },
       { id: 'combat-urban', label: 'Urban combat boost', description: 'Soldier combat bonus in cities.' },
       { id: 'soldier-consumption', label: 'Soldier consumption', description: 'Changes soldier resource consumption.' },
       { id: 'soldier-healing', label: 'Soldier healing', description: 'Changes soldier healing speed.' },

@@ -2,6 +2,116 @@
   "domainId": "biz-daycare-center",
   "editors": {
     "areaLayout": {
+      "areas": [
+        {
+          "id": "area-1",
+          "infested": false,
+          "q": 0,
+          "r": 0,
+          "river": true,
+          "start": true,
+          "terrain": "steady-volume"
+        },
+        {
+          "id": "area-2",
+          "infested": false,
+          "q": -1,
+          "r": 1,
+          "river": false,
+          "start": false,
+          "terrain": "steady-volume"
+        },
+        {
+          "id": "area-3",
+          "infested": false,
+          "q": 0,
+          "r": 1,
+          "river": false,
+          "start": false,
+          "terrain": "infrastructure-heavy"
+        },
+        {
+          "id": "area-4",
+          "infested": false,
+          "q": 1,
+          "r": 0,
+          "river": true,
+          "start": false,
+          "terrain": "steady-volume"
+        },
+        {
+          "id": "area-5",
+          "infested": false,
+          "q": 1,
+          "r": -1,
+          "river": false,
+          "start": false,
+          "terrain": "crowded-metro"
+        },
+        {
+          "id": "area-6",
+          "infested": false,
+          "q": 0,
+          "r": -1,
+          "river": false,
+          "start": false,
+          "terrain": "steady-volume"
+        },
+        {
+          "id": "area-7",
+          "infested": false,
+          "q": -1,
+          "r": 0,
+          "river": true,
+          "start": false,
+          "terrain": "contract-rich"
+        },
+        {
+          "id": "area-8",
+          "infested": false,
+          "q": -2,
+          "r": 2,
+          "river": false,
+          "start": false,
+          "terrain": "steady-volume"
+        },
+        {
+          "id": "area-9",
+          "infested": false,
+          "q": -1,
+          "r": 2,
+          "river": false,
+          "start": false,
+          "terrain": "infrastructure-heavy"
+        },
+        {
+          "id": "area-10",
+          "infested": true,
+          "q": 0,
+          "r": 2,
+          "river": false,
+          "start": false,
+          "terrain": "steady-volume"
+        },
+        {
+          "id": "area-11",
+          "infested": true,
+          "q": 1,
+          "r": 1,
+          "river": false,
+          "start": false,
+          "terrain": "crowded-metro"
+        },
+        {
+          "id": "area-12",
+          "infested": true,
+          "q": 2,
+          "r": 0,
+          "river": true,
+          "start": false,
+          "terrain": "specialist-niche"
+        }
+      ],
       "layout": "local-market"
     },
     "basicDetails": {
@@ -143,7 +253,8 @@
     "startingValues": {
       "authority": 55,
       "morale": 70,
-      "population": 4
+      "population": 4,
+      "stamina": 3
     }
   },
   "formatVersion": 1

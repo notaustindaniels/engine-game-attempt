@@ -13,7 +13,13 @@
       "accent": "#2c6bed",
       "accentText": "#ffffff",
       "danger": "#c93a3a",
-      "success": "#2e8b57"
+      "success": "#2e8b57",
+      "terrain0": "#a5cf8f",
+      "terrain1": "#7fbfb0",
+      "terrain2": "#b3a6d9",
+      "terrain3": "#a9b4c2",
+      "terrain4": "#e8c27a",
+      "mapRiver": "#5b9bd5"
     },
     "font": {
       "body": "'Segoe UI', 'Helvetica Neue', sans-serif",
@@ -50,6 +56,8 @@
     "validation.ok": "All fields valid",
     "resourceOp.ADD": "Add to default",
     "resourceOp.SET": "Set (override default)",
+    "map.seedLabel": "Generate from layout:",
+    "map.selectHint": "Select an area to edit it.",
     "field.unset": "—"
   },
   "icons": {

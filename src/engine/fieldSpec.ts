@@ -76,13 +76,35 @@ export interface ResourceOpsFieldSpec extends FieldBase {
   max: number;
 }
 
+/**
+ * Geometric area map: hex cells with per-cell terrain (domain `terrains`
+ * pool), river adjacency, pressure-producer flag, and exactly one start
+ * area. Cell shape and structural rules live in engine/areaMap.ts.
+ */
+export interface AreaMapFieldSpec extends FieldBase {
+  kind: 'areaMap';
+  minAreas: number;
+  maxAreas: number;
+  /** Lexicon tokens for the per-cell controls (content language). */
+  areaTokens: {
+    terrain: string;
+    river: string;
+    infested: string;
+    start: string;
+  };
+}
+
 export type ScalarFieldSpec =
   | TextFieldSpec
   | NumberFieldSpec
   | SelectFieldSpec
   | ToggleFieldSpec;
 
-export type FieldSpec = ScalarFieldSpec | ListFieldSpec | ResourceOpsFieldSpec;
+export type FieldSpec =
+  | ScalarFieldSpec
+  | ListFieldSpec
+  | ResourceOpsFieldSpec
+  | AreaMapFieldSpec;
 
 export interface EditorSpec {
   id: string;

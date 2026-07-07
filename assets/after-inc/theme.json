@@ -13,7 +13,13 @@
       "accent": "#c9a227",
       "accentText": "#14120e",
       "danger": "#b3462e",
-      "success": "#7a8c3f"
+      "success": "#7a8c3f",
+      "terrain0": "#6b7a3a",
+      "terrain1": "#3f5a36",
+      "terrain2": "#3e5c52",
+      "terrain3": "#6e6659",
+      "terrain4": "#57534d",
+      "mapRiver": "#4a7f9b"
     },
     "font": {
       "body": "'Courier New', monospace",
@@ -50,6 +56,8 @@
     "validation.ok": "All systems holding",
     "resourceOp.ADD": "Add to stockpile",
     "resourceOp.SET": "Override stockpile",
+    "map.seedLabel": "Redraw the map:",
+    "map.selectHint": "Pick a sector to inspect it.",
     "field.unset": "—"
   },
   "icons": {

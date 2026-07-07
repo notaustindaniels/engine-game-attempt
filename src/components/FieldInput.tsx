@@ -5,12 +5,14 @@ import type {
   SelectFieldSpec,
 } from '../engine/fieldSpec.ts';
 import type { FieldValue, ResourceOp, ScalarValue } from '../engine/scenario.ts';
+import type { AreaCell } from '../engine/areaMap.ts';
 import {
   domainLabel,
   poolItems,
   type DomainSchema,
 } from '../domain/types.ts';
 import { IconGlyph } from './IconGlyph.tsx';
+import { AreaMapInput } from './AreaMapInput.tsx';
 
 interface FieldInputProps {
   field: FieldSpec;
@@ -175,6 +177,17 @@ export function FieldInput(props: FieldInputProps) {
           <span>{theme.string('action.add')}</span>
         </button>
       </div>
+    );
+  }
+
+  if (field.kind === 'areaMap') {
+    return (
+      <AreaMapInput
+        field={field}
+        value={value as AreaCell[]}
+        domain={domain}
+        onChange={onChange}
+      />
     );
   }
 

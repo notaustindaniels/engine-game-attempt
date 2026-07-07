@@ -59,6 +59,11 @@ export function buildNicheDomain(pack: NichePack): DomainSchema {
         description: `Pick the market landscape the ${venture} launches into.`,
       },
       'field.areaLayout.layout': { label: 'Market landscape' },
+      'field.areaLayout.areas': { label: 'Segment map' },
+      'field.area.terrain': { label: 'Segment type' },
+      'field.area.river': { label: 'Infrastructure corridor' },
+      'field.area.infested': { label: 'Active pressure source' },
+      'field.area.start': { label: 'Home base' },
 
       'editor.startingEvents': { label: 'Opening Announcements' },
       'editor.startingEvents.desc': {
@@ -80,6 +85,7 @@ export function buildNicheDomain(pack: NichePack): DomainSchema {
       'field.startingValues.morale': { label: `${capitalize(team)} morale` },
       'field.startingValues.authority': { label: 'Founder credibility' },
       'field.startingValues.population': { label: 'Headcount' },
+      'field.startingValues.stamina': { label: 'Founder attention' },
 
       'editor.resources': { label: 'Capital & Inventory' },
       'editor.resources.desc': {
@@ -253,7 +259,10 @@ export function buildNicheScenario(pack: NichePack): {
     description:
       `Grow a new ${pack.venture} from a signed lease and a small founding team into a durable local institution, while ${pack.pressureLabel.toLowerCase()} works against every idle week.`,
   };
-  scenario.editors['areaLayout'] = { layout: 'local-market' };
+  scenario.editors['areaLayout'] = {
+    ...scenario.editors['areaLayout'],
+    layout: 'local-market',
+  };
   scenario.editors['startingEvents'] = {
     events: [
       {
@@ -276,6 +285,7 @@ export function buildNicheScenario(pack: NichePack): {
     morale: 70,
     authority: 55,
     population: 4,
+    stamina: 3,
   };
   scenario.editors['resources'] = {
     stockpiles: {

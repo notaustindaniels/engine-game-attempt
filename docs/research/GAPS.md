@@ -50,6 +50,21 @@ network policy), so anything the page does not spell out in indexed text is unre
 | B15 | Leaders and terrains pools are carried by every domain schema (10 sourced archetypes, 5 sourced terrain classes in after-inc) but no editor field selects from them | Leaders are a play-time choice per the Leaders page; terrain classes are sourced concept data subsumed by the area-layout presets. No editor evidence ties either to the Scenario Creator | — |
 | B16 | Micro-constraints invented for a workable editor and nowhere sourced: all text length caps (name 80, descriptions 500, button 40, file name 120, script body 20000), all list caps (starting events ≤10, custom events ≤20, goals ≤20, modifiers ≤10), and every defaultValue (A12: no defaults are sourced anywhere) | Practical editor limits only; never presented as wiki facts | `GAP:B16` / umbrella for A12 |
 
+## C. Runtime reconstruction decisions (playable engine + geometry)
+
+The runtime engine (`src/runtime/`, see docs/runtime.md) plays exported scenario JSON. The wiki
+documents the *mechanics* it implements but neither the game's data model nor its numeric tuning,
+so everything below is a flagged reconstruction, grounded in the sourced concept pages and never
+presented as a wiki fact.
+
+| # | Decision | Grounding (sourced) | Flag |
+|---|----------|---------------------|------|
+| C1 | Area map = hex cells `{id, q, r, terrain, river, infested, start}` on an axial grid, 5–50 cells, coords in [-12, 12], exactly one non-infested start area, all cells connected. Preset generator sizes/mix echo the A New Dawn census (28 areas, grassland-heavy, one river) | Area states, terrain classes, river adjacency, infested producer areas, and the settlement area are all sourced (Areas page; A_New_Dawn census single-source). The map's *data model* is unsourceable (A2) | `GAP:C1` |
+| C2 | Starting Values gains `stamina` [0-20], default 3 | Stamina as the action currency, its regeneration and soft cap are sourced (Stamina page). No editor field or range for it is documented (A4, A12) | `GAP:C2` |
+| C3 | Custom-event scripts are interpreted by the runtime as a line-directive API (`ON` / `TEXT` / `BUTTON` / `EFFECT`, Lua-comment-friendly, unknown lines inert), documented in docs/runtime.md | The wiki confirms scripts are uploaded .lua/.txt files driving effects "through the game's API", but the API itself is unindexed (A9). This project defines its own API rather than fabricating the game's | `GAP:C3` |
+| C4 | Domain pool **slot convention**: pool order carries mechanic roles shared by every domain (resources: staple/demand/construction/seasonal/recovery/heavy/advanced; terrains 0-4 produce resources 0/2/4/5/none; seasons: normal/lean/crunch; leaders, modifiers, goal types, difficulties by index). Enforced by tests/runtime tests | Terrain→resource yields, season effects, leader abilities, goal types and difficulty tiers are sourced per concept page; tying them to *pool positions* is this project's device for keeping the engine domain-agnostic | `GAP:C4` |
+| C5 | All runtime tuning constants (production/consumption rates, combat math, morale/authority deltas, regen cadence where unsourced) are engine rules listed in docs/runtime.md, scaled by sourced values wherever one exists (festival +6.5–7.5% morale, +50 patience; healing 0.2–10%/turn; impatience damping 99/90/80%; goal-tick penalty +0.44/+0.528; storage +60%; tech lead time 25 turns) | Sourced values cited inline in docs/runtime.md; everything else A12/A13 | `GAP:C5` |
+
 Every `GAP:` marker in the blueprint names the GAPS.md row(s) it depends on — usually a
 B-row (reconstruction decision, which in turn cites its A-rows), occasionally an A-row
 directly — so the adversarial verification lane can mechanically cross-check app fields

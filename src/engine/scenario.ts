@@ -8,6 +8,14 @@ import type {
 } from './fieldSpec.ts';
 import type { DomainSchema } from '../domain/types.ts';
 import { ScenarioParseError, stableStringify } from './io.ts';
+import {
+  AREA_COORD_MAX,
+  AREA_COORD_MIN,
+  AREA_ID_PATTERN,
+  areaMapProblems,
+  generateAreaMapPreset,
+  type AreaCell,
+} from './areaMap.ts';
 
 export const SCENARIO_FORMAT_VERSION = 1;
 
@@ -18,7 +26,8 @@ export type ScalarValue = string | number | boolean;
 export type FieldValue =
   | ScalarValue
   | Record<string, ScalarValue>[]
-  | Record<string, { op: ResourceOp; amount: number }>;
+  | Record<string, { op: ResourceOp; amount: number }>
+  | AreaCell[];
 
 export interface Scenario {
   formatVersion: number;
@@ -85,6 +94,30 @@ function fieldZod(field: FieldSpec, domain: DomainSchema): z.ZodType {
         });
       }
       return z.strictObject(shape);
+    }
+    case 'areaMap': {
+      const terrainIds = domain.pools.terrains.map((t) => t.id);
+      if (terrainIds.length === 0) {
+        throw new Error(`Area map field "${field.id}" needs a terrains pool`);
+      }
+      const cell = z.strictObject({
+        id: z.string().regex(AREA_ID_PATTERN),
+        q: z.number().int().min(AREA_COORD_MIN).max(AREA_COORD_MAX),
+        r: z.number().int().min(AREA_COORD_MIN).max(AREA_COORD_MAX),
+        terrain: z.enum(terrainIds as [string, ...string[]]),
+        river: z.boolean(),
+        infested: z.boolean(),
+        start: z.boolean(),
+      });
+      return z
+        .array(cell)
+        .min(field.minAreas)
+        .max(field.maxAreas)
+        .superRefine((areas, ctx) => {
+          for (const problem of areaMapProblems(areas)) {
+            ctx.addIssue({ code: 'custom', message: problem });
+          }
+        });
     }
     default:
       return scalarZod(field, domain);
@@ -153,6 +186,8 @@ function defaultField(field: FieldSpec, domain: DomainSchema): FieldValue {
       }
       return rows;
     }
+    case 'areaMap':
+      return generateAreaMapPreset(domain, 0);
     default:
       return defaultScalar(field, domain);
   }

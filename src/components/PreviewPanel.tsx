@@ -48,6 +48,11 @@ function summarize(
     const rows = value as Record<string, ScalarValue>[];
     return String(rows.length);
   }
+  if (field.kind === 'areaMap') {
+    const areas = value as { infested: boolean }[];
+    const producers = areas.filter((a) => a.infested).length;
+    return `${areas.length} (${producers})`;
+  }
   if (field.kind === 'resourceOps') {
     const table = value as Record<string, { op: ResourceOp; amount: number }>;
     const touched = poolItems(domain, 'resources').filter((r) => {

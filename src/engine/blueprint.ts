@@ -74,6 +74,21 @@ export const blueprint: Blueprint = [
         options: { from: 'domain', pool: 'areaLayouts' },
         source: 'GAP:B2',
       },
+      {
+        id: 'areas',
+        labelToken: 'field.areaLayout.areas',
+        kind: 'areaMap',
+        minAreas: 5,
+        maxAreas: 50,
+        areaTokens: {
+          terrain: 'field.area.terrain',
+          river: 'field.area.river',
+          infested: 'field.area.infested',
+          start: 'field.area.start',
+        },
+        source:
+          'https://afterinc.wiki.gg/wiki/Areas (area states, terrain classes, river adjacency, infested producers, settlement area all sourced; hex-grid data model + caps GAP:C1)',
+      },
     ],
   },
   {
@@ -161,6 +176,17 @@ export const blueprint: Blueprint = [
         integer: true,
         defaultValue: 5,
         source: 'GAP:B4',
+      },
+      {
+        id: 'stamina',
+        labelToken: 'field.startingValues.stamina',
+        kind: 'number',
+        min: 0,
+        max: 20,
+        integer: true,
+        defaultValue: 3,
+        source:
+          'https://afterinc.wiki.gg/wiki/Stamina (action-currency mechanic sourced; field + range GAP:C2)',
       },
     ],
   },
@@ -465,6 +491,9 @@ export function blueprintTokens(): string[] {
     for (const field of editor.fields) {
       tokens.add(field.labelToken);
       if (field.helpToken !== undefined) tokens.add(field.helpToken);
+      if (field.kind === 'areaMap') {
+        for (const token of Object.values(field.areaTokens)) tokens.add(token);
+      }
       if (field.kind === 'list') {
         for (const item of field.item) {
           tokens.add(item.labelToken);
