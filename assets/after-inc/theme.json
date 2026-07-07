@@ -58,6 +58,14 @@
     "resourceOp.SET": "Override stockpile",
     "map.seedLabel": "Redraw the map:",
     "map.selectHint": "Pick a sector to inspect it.",
+    "action.playtest": "Field test",
+    "game.day": "Day",
+    "game.log": "Dispatches",
+    "game.continue": "Onward",
+    "game.restart": "Start over",
+    "game.endTurn": "Next day",
+    "game.loadScenario": "Load expedition file",
+    "game.actionBlocked": "No can do:",
     "field.unset": "—"
   },
   "icons": {

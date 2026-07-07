@@ -636,6 +636,18 @@ function goalMetric(rules: GameRules, s: GameState, typeIndex: number): number {
   }
 }
 
+/** Current progress figure for a goal, for display: maintain-type goals report held turns. */
+export function goalProgress(rules: GameRules, s: GameState, index: number): number {
+  const rule = rules.goals[index];
+  const goal = s.goals[index];
+  if (!rule || !goal) return 0;
+  if (goal.completed) return rule.typeIndex === 4 || rule.typeIndex === 8
+    ? TUNING.maintainTurns
+    : rule.targetAmount;
+  if (rule.typeIndex === 4 || rule.typeIndex === 8) return goal.maintainTicks;
+  return goalMetric(rules, s, rule.typeIndex);
+}
+
 function stepGoals(rules: GameRules, s: GameState): void {
   const active = s.goals[s.activeGoalIndex];
   const rule = rules.goals[s.activeGoalIndex];

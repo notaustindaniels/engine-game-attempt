@@ -1,6 +1,7 @@
 import { domainSchemaZ, type DomainSchema } from './types.ts';
 import { afterIncDomain } from './afterInc.ts';
 import { blueprintTokens } from '../engine/blueprint.ts';
+import { runtimeTokens } from '../runtime/tokens.ts';
 import { nichePacks } from './business/niches.ts';
 import { buildNicheDomain, businessDomainId } from './business/generator.ts';
 
@@ -14,7 +15,8 @@ const domains = new Map<string, DomainSchema>();
 
 export function registerDomain(domain: DomainSchema): DomainSchema {
   const parsed = domainSchemaZ.parse(domain);
-  const missing = blueprintTokens().filter((t) => parsed.lexicon[t] === undefined);
+  const required = [...blueprintTokens(), ...runtimeTokens()];
+  const missing = required.filter((t) => parsed.lexicon[t] === undefined);
   if (missing.length > 0) {
     throw new Error(
       `Domain "${parsed.id}" is missing lexicon tokens: ${missing.join(', ')}`,

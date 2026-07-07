@@ -97,6 +97,24 @@ function AppShell(props: AppProps) {
     }
   };
 
+  const onPlaytest = () => {
+    try {
+      const json = exportScenario(scenario, blueprint, domain);
+      window.localStorage.setItem('scenario-playtest', json);
+      const params = new URLSearchParams(window.location.search);
+      const themeParam = params.get('theme');
+      window.open(
+        `play.html${themeParam !== null ? `?theme=${themeParam}` : ''}`,
+        '_blank',
+      );
+      setImportIssues([]);
+    } catch (err) {
+      setImportIssues(
+        err instanceof ScenarioParseError ? err.issues : [String(err)],
+      );
+    }
+  };
+
   const cssVars = theme.cssVariables() as CSSProperties;
 
   return (
@@ -131,6 +149,10 @@ function AppShell(props: AppProps) {
           >
             <IconGlyph id="action.add" />
             <span>{theme.string('action.newScenario')}</span>
+          </button>
+          <button type="button" className="app-action" onClick={onPlaytest}>
+            <IconGlyph id="mechanic.goal" />
+            <span>{theme.string('action.playtest')}</span>
           </button>
         </div>
       </header>

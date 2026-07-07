@@ -9,33 +9,13 @@ import {
 } from '../engine/areaMap.ts';
 import { domainLabel, poolItems, type DomainSchema } from '../domain/types.ts';
 import { IconGlyph } from './IconGlyph.tsx';
+import { HEX_SIZE, hexBounds, hexCenter, hexPoints } from './hex.ts';
 
 interface AreaMapInputProps {
   field: AreaMapFieldSpec;
   value: AreaCell[];
   domain: DomainSchema;
   onChange: (value: AreaCell[]) => void;
-}
-
-const HEX_SIZE = 22;
-
-/** Flat-top axial → pixel. */
-function hexCenter(q: number, r: number): { x: number; y: number } {
-  return {
-    x: HEX_SIZE * 1.5 * q,
-    y: HEX_SIZE * (Math.sqrt(3) / 2) * q + HEX_SIZE * Math.sqrt(3) * r,
-  };
-}
-
-function hexPoints(cx: number, cy: number, size: number): string {
-  const points: string[] = [];
-  for (let i = 0; i < 6; i++) {
-    const angle = (Math.PI / 180) * (60 * i);
-    points.push(
-      `${(cx + size * Math.cos(angle)).toFixed(2)},${(cy + size * Math.sin(angle)).toFixed(2)}`,
-    );
-  }
-  return points.join(' ');
 }
 
 function nextAreaId(areas: readonly AreaCell[]): string {
@@ -78,20 +58,7 @@ export function AreaMapInput(props: AreaMapInputProps) {
     })).filter((c) => !byCoord.has(coordKey(c.q, c.r)));
   }, [selected, areas.length, field.maxAreas, byCoord]);
 
-  const bounds = useMemo(() => {
-    const centers = [
-      ...areas.map((a) => hexCenter(a.q, a.r)),
-      ...ghosts.map((g) => hexCenter(g.q, g.r)),
-    ];
-    const pad = HEX_SIZE * 1.4;
-    const xs = centers.map((c) => c.x);
-    const ys = centers.map((c) => c.y);
-    const minX = Math.min(...xs, 0) - pad;
-    const minY = Math.min(...ys, 0) - pad;
-    const maxX = Math.max(...xs, 0) + pad;
-    const maxY = Math.max(...ys, 0) + pad;
-    return { minX, minY, width: maxX - minX, height: maxY - minY };
-  }, [areas, ghosts]);
+  const bounds = useMemo(() => hexBounds([...areas, ...ghosts]), [areas, ghosts]);
 
   const updateCell = (id: string, patch: Partial<AreaCell>) => {
     onChange(

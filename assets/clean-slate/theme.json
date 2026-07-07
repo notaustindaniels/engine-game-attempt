@@ -58,6 +58,14 @@
     "resourceOp.SET": "Set (override default)",
     "map.seedLabel": "Generate from layout:",
     "map.selectHint": "Select an area to edit it.",
+    "action.playtest": "Playtest",
+    "game.day": "Day",
+    "game.log": "Activity log",
+    "game.continue": "Continue",
+    "game.restart": "Restart run",
+    "game.endTurn": "Advance day",
+    "game.loadScenario": "Load scenario JSON",
+    "game.actionBlocked": "Action unavailable:",
     "field.unset": "—"
   },
   "icons": {
