@@ -1,4 +1,4 @@
-# Scenario Creator
+# Scenario Creator — and the game that plays its files
 
 A domain-agnostic scenario-editor web app in strict TypeScript, modeled 1:1 on the
 Custom Scenarios editor of Ndemic Creations' *After Inc: Revival* — and re-skinnable
@@ -9,19 +9,34 @@ zombie infestations describes a wedding-photography studio holding out against
 seasonal booking droughts and a saturated local market. Mechanics are shared;
 language never leaks across domains.
 
+The repo also ships the **runtime**: a turn-based engine plus playable UI
+(`/play.html`) whose sole content source is exported scenario JSON — the
+creator authors it, the engine plays it, in whichever domain's language the
+scenario was written. See [docs/runtime.md](docs/runtime.md). The flagship
+authored campaign is
+[**The Clear View Window Co.**](scenarios/clear-view-window-co.json) — a
+window installation & glazing business bootstrapped from one truck and two
+good hands to a regional window empire against lead drought, cash burn, and
+entrenched competitors; its win *and* loss paths are proven by scripted
+playthroughs in `tests/clearView.test.ts`.
+
 ## Quick start
 
 ```bash
 npm ci
-npm run dev                    # editor UI (theme/domain via query params, see below)
-npm test                       # full Vitest suite
-npm run build                  # tsc -b && vite build
+npm run dev                    # editor at /, game at /play.html (params below)
+npm test                       # full Vitest suite (incl. playthrough proofs)
+npm run build                  # tsc -b && vite build (both pages)
 npm run generate:example       # random business niche → /examples/<niche>-scenario.json
 npm run generate:example -- craft-brewery   # or a specific niche
+npm run generate:clear-view    # authored campaign → /scenarios/clear-view-window-co.json
 ```
 
-URL parameters: `?theme=after-inc|clean-slate` and `?domain=after-inc|biz-<niche-id>`
-(e.g. `?theme=clean-slate&domain=biz-daycare-center`).
+URL parameters (both pages): `?theme=after-inc|clean-slate` and
+`?domain=after-inc|clear-view-window-co|biz-<niche-id>`
+(e.g. `?theme=clean-slate&domain=biz-daycare-center`). The editor's
+**Playtest** action hands the current scenario straight to `/play.html`;
+the player also loads any exported scenario JSON from disk.
 
 ## Architecture
 
@@ -37,6 +52,17 @@ Two abstraction layers, enforced by tests:
   content language (editor titles, field labels, option pools, event galleries).
   `src/engine/scenario.ts` builds the Zod validation schema *and* the defaults
   from that same data, so UI, defaults, and import validation cannot drift.
+
+Both contracts extend to the runtime: the game UI consumes `useTheme()` and
+the domain lexicon only (structural-equivalence tested in
+`tests/playUi.test.tsx`), and the engine reads mechanics from scenario JSON
+plus domain **pool order** — the slot convention documented in
+[docs/runtime.md](docs/runtime.md) and GAPS.md C4. Maps are real geometry:
+the area-layout editor stores hex cells (terrain, corridor, pressure-producer
+and start flags) validated for uniqueness, single start, and connectivity.
+Custom-event scripts are live: a documented line-directive API
+(`ON`/`TEXT`/`BUTTON`/`EFFECT`/`REPEAT`, Lua-comment-friendly) that the
+engine interprets (GAPS.md C3).
 
 Research provenance: every blueprint field carries a wiki source URL or a
 `GAP:` marker cross-referenced in [docs/research/GAPS.md](docs/research/GAPS.md);
@@ -86,11 +112,17 @@ behavior — into the niche's own ambient pressure ("booking droughts",
 assets/<theme>/           theme.json + icons/ per theme (after-inc, clean-slate)
 docs/ADR-001.md           framework decision record
 docs/research/            Phase 1 wiki research: 11 editors, concepts, GAPS.md
+docs/runtime.md           runtime rules, slot convention, script API
 examples/                 generated niche-native scenario JSON (round-trip tested)
-scripts/generate-example.ts   Phase 3 generator (random niche from 50-item seed list)
-src/engine/               blueprint, Zod schema builder, IO, vocabulary lint
-src/domain/               domain contract, canonical domain, business generator
+scenarios/                authored campaigns (The Clear View Window Co.)
+scripts/                  example generator + Clear View generator
+src/engine/               blueprint, Zod schema builder, area maps, script DSL,
+                          IO, vocabulary lint
+src/domain/               domain contract, canonical domain, business generator,
+                          hand-authored Clear View domain
+src/runtime/              pure game engine (rules/state/reducer) + game UI
 src/theme/                theme contract, registry, React context
-src/components/           blueprint-driven editor UI + live preview
-tests/                    schema, round-trip, themes, structure, vocab, example
+src/components/           blueprint-driven editor UI + live preview + hex map
+tests/                    schema, round-trip, themes, structure, vocab, example,
+                          area maps, script DSL, engine, game UI, playthroughs
 ```
